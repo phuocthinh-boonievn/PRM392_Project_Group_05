@@ -1,8 +1,10 @@
-package com.example.minicapstoneproject;
+package com.example.minicapstoneproject.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.minicapstoneproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
