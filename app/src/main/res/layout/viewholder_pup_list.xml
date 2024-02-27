@@ -93,7 +93,7 @@
         android:src="@tools:sample/avatars"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/review" />
+        app:srcCompat="@drawable/review"/>
 
     <TextView
         android:id="@+id/reviewTxt"
