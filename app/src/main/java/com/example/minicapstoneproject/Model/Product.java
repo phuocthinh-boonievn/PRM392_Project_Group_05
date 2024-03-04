@@ -1,21 +1,23 @@
 package com.example.minicapstoneproject.Model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String title;
     private String imageURL;
     private String description;
     private int review;
     private double price;
     private double score;
-    private int numberInChart;
-    public Product(String title, String imageURL, String description, int review, double price, double score, int numberInChart) {
+    private int numberInCart;
+    public Product(String title, String imageURL, String description, int review, double price, double score, int numberInCart) {
         this.title = title;
         this.imageURL = imageURL;
         this.description = description;
         this.review = review;
         this.price = price;
         this.score = score;
-        this.numberInChart = numberInChart;
+        this.numberInCart = numberInCart;
     }
     public String getTitle() {
         return title;
@@ -53,10 +55,10 @@ public class Product {
     public void setScore(double score) {
         this.score = score;
     }
-    public int getNumberInChart() {
-        return numberInChart;
+    public int getNumberInCart() {
+        return numberInCart;
     }
-    public void setNumberInChart(int numberInChart) {
-        this.numberInChart = numberInChart;
+    public void setNumberInCart(int numberInChart) {
+        this.numberInCart = numberInChart;
     }
 }
