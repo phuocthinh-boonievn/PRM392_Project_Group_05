@@ -7,7 +7,7 @@
     tools:context=".Activity.CartActivity">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/emptyTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Cart is empty"
@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -306,13 +307,13 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button2"
                 style="@android:style/Widget.Button"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/btn_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_background"
                 android:text="Order Now"
-                android:textSize="18sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
         </LinearLayout>
     </ScrollView>
