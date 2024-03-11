@@ -47,4 +47,8 @@ public class MainActivity extends AppCompatActivity {
         binding.PopularView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.PopularView.setAdapter(new ProductAdapter(items));
     }
+
+    public void profile(View view) {
+        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+    }
 }

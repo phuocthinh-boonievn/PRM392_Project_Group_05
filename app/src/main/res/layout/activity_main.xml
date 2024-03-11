@@ -399,18 +399,20 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/profileBtn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:onClick="profile">
 
                     <ImageView
                         android:id="@+id/imageView22"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
-
-                        android:src="@drawable/btn_4" />
+                        android:src="@drawable/btn_4"
+                        />
 
                     <TextView
                         android:id="@+id/textView3"
