@@ -16,6 +16,7 @@ import com.example.minicapstoneproject.Model.Product;
 import com.example.minicapstoneproject.databinding.ViewholderPupListBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     ArrayList<Product> items;
@@ -40,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         binding.scoreTxt.setText(items.get(position).getScore() + "");
 
         int drawableResourceID = holder.itemView.getResources().getIdentifier(items.get(position).getImageURL()
-        , "drawable", holder.itemView.getContext().getPackageName());
+                , "drawable", holder.itemView.getContext().getPackageName());
 
         //Load image to display using Glide framework
         Glide.with(context)
@@ -61,6 +62,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public int getItemCount() {
         return items.size();
+    }
+    public void filterList(List<Product> filteredList) {
+        items = (ArrayList<Product>) filteredList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
