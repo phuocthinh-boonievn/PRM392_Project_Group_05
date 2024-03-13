@@ -26,7 +26,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ProductAdapter(ArrayList<Product> items) {
         this.items = items;
     }
-
     @NonNull
     @Override
     public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,7 +33,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         context = parent.getContext();
         return new ViewHolder(binding);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         ViewholderPupListBinding binding = holder.binding; // Lấy ra binding của ViewHolder hiện tại
@@ -46,12 +44,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         int drawableResourceID = holder.itemView.getResources().getIdentifier(items.get(position).getImageURL()
                 , "drawable", holder.itemView.getContext().getPackageName());
 
-        //Load image to display using Glide framework
         Glide.with(context)
                 .load(drawableResourceID)
                 .transform(new GranularRoundedCorners(30, 30, 0, 30))
                 .into(binding.pic);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,20 +57,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return items.size();
     }
-
     public void filterList(List<Product> filteredList) {
         items = (ArrayList<Product>) filteredList;
         notifyDataSetChanged();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         ViewholderPupListBinding binding;
-
         public ViewHolder(ViewholderPupListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

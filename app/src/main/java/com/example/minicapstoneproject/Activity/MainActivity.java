@@ -33,42 +33,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
         searchEditText = findViewById(R.id.editTextText);
         recyclerView = findViewById(R.id.PopularView);
 
-        // Initialize lists
         productList = new ArrayList<>();
         filteredList = new ArrayList<>();
 
-        // Add products to the list
         productList.add(new Product("Product 1", "item_1","D1", 4, 19.99, 4.5, 0));
         productList.add(new Product("Product 2", "item_2","D1", 4, 19.99, 4.5, 0));
         productList.add(new Product("Product 3", "item_3","D1", 4, 19.99, 4.5, 0));
 
-        // Set up RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ProductAdapter((ArrayList<Product>) productList);
         recyclerView.setAdapter(adapter);
 
-        // Initialize filtered list with all products
         filteredList.addAll(productList);
 
-        // Search functionality
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 filter(s.toString());
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
     }
-
     private void filter(String text) {
         filteredList.clear();
         if (text.isEmpty()) {
@@ -82,5 +73,4 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter.filterList(filteredList);
     }
-
 }
