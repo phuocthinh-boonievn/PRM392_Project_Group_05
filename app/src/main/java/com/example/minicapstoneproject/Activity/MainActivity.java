@@ -5,11 +5,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.example.minicapstoneproject.Adapter.ProductAdapter;
+import com.example.minicapstoneproject.Database.DBHelper;
 import com.example.minicapstoneproject.Model.Product;
 import com.example.minicapstoneproject.R;
 import com.example.minicapstoneproject.databinding.ActivityMainBinding;
@@ -18,12 +21,30 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    TextView userName;
+    SharedPreferences sharedPreferences;
+    private final static String SHARED_PREF_NAME = "mypref";
+    private final static String KEY_EMAIL = "email";
+    DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        userName = findViewById(R.id.username);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        String email = sharedPreferences.getString(KEY_EMAIL,"");
+//        String email = "aaaa";
+        db = new DBHelper(this);
+        if (!email.equals("")) {
+            String name = db.getNameByEmail(email);
+            userName.setText(name);
+        }
         statusBarColor();
         initRecyclerView();
         bottomNavigation();
@@ -49,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void profile(View view) {
-        startActivity(new Intent(MainActivity.this,LoginActivity.class));
+        String temp = sharedPreferences.getString(KEY_EMAIL,"");
+        if(!temp.equals("")){
+            startActivity(new Intent(getApplicationContext(), Userinfo.class));
+        }else{
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        }
     }
 }

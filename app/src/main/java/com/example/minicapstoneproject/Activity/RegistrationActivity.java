@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.minicapstoneproject.Database.DBHelper;
+import com.example.minicapstoneproject.Model.User;
 import com.example.minicapstoneproject.R;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -43,7 +44,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 }else if (db.checkEmail(txtemail)){
                     Toast.makeText(getApplicationContext(),"Existed Email",Toast.LENGTH_SHORT).show();
                 }else if(txtpassword.equals(txtrepassword)){
-                    boolean insert = db.insertUser(txtemail,txtname,txtpassword);
+                    User user = new User(txtemail,txtname,txtpassword);
+                    boolean insert = db.insertUser(user);
                     if(insert){
                         Toast.makeText(getApplicationContext(),"Registed Successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(),LoginActivity.class));

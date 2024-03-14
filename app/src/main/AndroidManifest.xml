@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiniCapstoneProject">
         <activity
+            android:name=".Activity.Userinfo"
+            android:exported="false" />
+        <activity
             android:name=".Activity.RegistrationActivity"
             android:exported="false" />
         <activity

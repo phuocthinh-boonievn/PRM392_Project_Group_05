@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.minicapstoneproject.Model.User;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBName = "Login.DB";
@@ -26,12 +28,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS users");
     }
 
-    public boolean insertUser(String email, String name, String password){
+    public boolean insertUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("email",email);
-        contentValues.put("name",name);
-        contentValues.put("password",password);
+        contentValues.put("email",user.getEmail());
+        contentValues.put("name",user.getName());
+        contentValues.put("password",user.getPassword());
         long result  = db.insert("users", null, contentValues);
         if(result==-1){
             return false;
@@ -52,5 +54,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ? AND password = ?", new String[]{email, password});
         if(cursor.getCount()>0) return true;
         else return false;
+    }
+    public String getNameByEmail(String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ?", new String[]{email});
+        if(cursor.getCount()>0){
+            return cursor.getString(2);
+        }
+        else return null;
     }
 }
