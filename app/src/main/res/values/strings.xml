@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MiniCapstoneProject</string>
-    <string name="my_map_API">AIzaSyB69L-iqaHVZT8xyC09AJyit2jk5adEOxU</string>
     <string name="google_maps_key">AIzaSyB69L-iqaHVZT8xyC09AJyit2jk5adEOxU</string>
 
 </resources>

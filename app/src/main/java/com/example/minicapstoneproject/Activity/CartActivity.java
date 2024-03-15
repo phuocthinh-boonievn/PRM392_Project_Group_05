@@ -12,12 +12,10 @@ import android.content.Intent;
 import com.example.minicapstoneproject.Adapter.CartAdapter;
 import com.example.minicapstoneproject.R;
 import com.example.minicapstoneproject.Utils.CartManagement;
-import com.example.minicapstoneproject.Utils.ChangeNumberItemsListener;
 import com.example.minicapstoneproject.databinding.ActivityCartBinding;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
@@ -31,6 +29,7 @@ public class CartActivity extends AppCompatActivity {
     private CartManagement managmentCart;
     ActivityCartBinding binding;
     double tax;
+    private PlacesClient placesClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +48,13 @@ public class CartActivity extends AppCompatActivity {
     private void initGooglePlaces() {
         // Initialize Places.
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
+        // Create a new Places client instance.
+        placesClient = Places.createClient(this);
     }
-
     private void statusBarColor() {
         Window window = CartActivity.this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(CartActivity.this, R.color.purple_Dark));
     }
-
     private void initlist() {
         if (managmentCart.getListCart().isEmpty()) {
             binding.emptyTxt.setVisibility(View.VISIBLE);
@@ -68,7 +67,6 @@ public class CartActivity extends AppCompatActivity {
         binding.cartView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.cartView.setAdapter(new CartAdapter(managmentCart.getListCart(), () -> calculatorCart()));
     }
-
     private void calculatorCart() {
         double percentTax= 0.02;
         double delivery= 10;
@@ -80,8 +78,9 @@ public class CartActivity extends AppCompatActivity {
         binding.taxTxt.setText("$"+tax);
         binding.deliveryTxt.setText("$"+delivery);
         binding.totalTxt.setText("$"+total);
-    }
 
+
+    }
     private void setVariable() {
         binding.backBtn.setOnClickListener(v -> finish());
         binding.textView27.setOnClickListener(v -> {
