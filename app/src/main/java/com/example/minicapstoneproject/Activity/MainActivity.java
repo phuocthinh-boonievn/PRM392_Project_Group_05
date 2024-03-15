@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.Window;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.minicapstoneproject.Adapter.ProductAdapter;
 import com.example.minicapstoneproject.Model.Product;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ProductAdapter adapter;
     private List<Product> productList;
     private List<Product> filteredList;
+    private ImageView cartButton; // Add this
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         searchEditText = findViewById(R.id.editTextText);
         recyclerView = findViewById(R.id.PopularView);
+        cartButton = findViewById(R.id.imageView29); // Initialize cart button
 
         productList = new ArrayList<>();
         filteredList = new ArrayList<>();
@@ -58,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {}
+        });
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open ActivityCart
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
         });
     }
     private void filter(String text) {
