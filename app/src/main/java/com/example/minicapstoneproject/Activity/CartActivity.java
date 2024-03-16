@@ -83,6 +83,7 @@ public class CartActivity extends AppCompatActivity {
     }
     private void setVariable() {
         binding.backBtn.setOnClickListener(v -> finish());
+        binding.backBtnBackUp.setOnClickListener(v -> finish());
         binding.textView27.setOnClickListener(v -> {
             // Set the fields to specify which types of place data to
             // return after the user has made a selection.
