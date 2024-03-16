@@ -15,13 +15,13 @@ import com.example.minicapstoneproject.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText email, password;
+    EditText name, password;
     Button btnLogin;
     DBHelper db;
     SharedPreferences sharedPreferences;
 
     private final static String SHARED_PREF_NAME = "mypref";
-    private final static String KEY_EMAIL = "email";
+    private final static String KEY_NAME = "name";
     private final static String KEY_PASSWORD = "password";
 
     @Override
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email = findViewById(R.id.email);
+        name = findViewById(R.id.name);
         password = findViewById(R.id.password);
         db = new DBHelper(this);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
@@ -41,14 +41,14 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Email = email.getText().toString();
+                String Name = name.getText().toString();
                 String Password = password.getText().toString();
 
-                if(Email.equals("") || Password.equals("")){
+                if(Name.equals("") || Password.equals("")){
                     Toast.makeText(LoginActivity.this,"Please fill your EMAIL and PASSWORD",Toast.LENGTH_SHORT).show();
-                } else if (db.checkEmailPassword(Email,Password)) {
+                } else if (db.checkNamePassword(Name,Password)) {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(KEY_EMAIL,Email);
+                    editor.putString(KEY_NAME,Name);
                     editor.putString(KEY_PASSWORD,Password);
                     editor.apply();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));

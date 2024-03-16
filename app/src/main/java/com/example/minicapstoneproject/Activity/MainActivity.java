@@ -12,9 +12,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.example.minicapstoneproject.Adapter.ProductAdapter;
-import com.example.minicapstoneproject.Database.DBHelper;
 import com.example.minicapstoneproject.Model.Product;
-import com.example.minicapstoneproject.Model.User;
 import com.example.minicapstoneproject.R;
 import com.example.minicapstoneproject.databinding.ActivityMainBinding;
 
@@ -25,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView userName;
     SharedPreferences sharedPreferences;
     private final static String SHARED_PREF_NAME = "mypref";
-    private final static String KEY_EMAIL = "email";
-    DBHelper db;
+    private final static String KEY_NAME = "name";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.username);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        String email = sharedPreferences.getString(KEY_EMAIL,"");
-//        String email = "aaaa";
-        db = new DBHelper(this);
-        if (!email.equals("")) {
-            userName.setText(email);
-        }
+        String name = sharedPreferences.getString(KEY_NAME,"");
+        userName.setText(name);
         statusBarColor();
         initRecyclerView();
         bottomNavigation();
@@ -66,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void profile(View view) {
-        String temp = sharedPreferences.getString(KEY_EMAIL,"");
+        String temp = sharedPreferences.getString(KEY_NAME,"");
         if(!temp.equals("")){
             startActivity(new Intent(getApplicationContext(), Userinfo.class));
         }else{

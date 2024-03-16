@@ -15,7 +15,7 @@ import com.example.minicapstoneproject.R;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    EditText name,email,password,repassword;
+    EditText name,password,repassword;
     Button signup;
     DBHelper db;
     @Override
@@ -24,7 +24,6 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         repassword = findViewById(R.id.repassword);
         signup = findViewById(R.id.signupBtn);
@@ -35,16 +34,15 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String txtname = name.getText().toString();
-                String txtemail = email.getText().toString();
                 String txtpassword = password.getText().toString();
                 String txtrepassword = repassword.getText().toString();
 
-                if(txtname.equals("") || txtemail.equals("") || txtpassword.equals("") || txtrepassword.equals("")){
+                if(txtname.equals("") || txtpassword.equals("") || txtrepassword.equals("")){
                     Toast.makeText(getApplicationContext(),"Please Fill All Field",Toast.LENGTH_SHORT).show();
-                }else if (db.checkEmail(txtemail)){
+                }else if (db.checkName(txtname)){
                     Toast.makeText(getApplicationContext(),"Existed Email",Toast.LENGTH_SHORT).show();
                 }else if(txtpassword.equals(txtrepassword)){
-                    User user = new User(txtemail,txtname,txtpassword);
+                    User user = new User(txtname,txtpassword);
                     boolean insert = db.insertUser(user);
                     if(insert){
                         Toast.makeText(getApplicationContext(),"Registed Successfully", Toast.LENGTH_SHORT).show();

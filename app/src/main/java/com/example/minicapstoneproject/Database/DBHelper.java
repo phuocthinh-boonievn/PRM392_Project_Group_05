@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users(email TEXT PRIMARY KEY, name TEXT, password TEXT)");
+        db.execSQL("CREATE TABLE users(name TEXT PRIMARY KEY, password TEXT)");
     }
 
     @Override
@@ -31,7 +31,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean insertUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("email",user.getEmail());
         contentValues.put("name",user.getName());
         contentValues.put("password",user.getPassword());
         long result  = db.insert("users", null, contentValues);
@@ -42,30 +41,16 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean checkEmail(String email){
+    public boolean checkName(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ?",  new String[]{email});
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE name = ?",  new String[]{name});
         if (cursor.getCount()>0) return true;
         else return false;
     }
 
-    public boolean checkEmailPassword(String email, String password){
+    public boolean checkNamePassword(String name, String password){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ? AND password = ?", new String[]{email, password});
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE name = ? AND password = ?", new String[]{name, password});
         return cursor.getCount() > 0;
-    }
-    public String getNameByEmail(String email){
-        try{SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ?", new String[]{email});
-        if(cursor.getCount()>0){
-            int index = cursor.getColumnIndex("name");
-            if (index!=-1) {
-                return cursor.getString(index);
-            }
-        }
-        return "";
-        } catch (Exception e){
-            return "";
-        }
     }
 }

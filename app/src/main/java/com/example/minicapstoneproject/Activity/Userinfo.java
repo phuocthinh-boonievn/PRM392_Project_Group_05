@@ -19,8 +19,8 @@ public class Userinfo extends AppCompatActivity {
     DBHelper db;
     SharedPreferences sharedPreferences;
     private final static String SHARED_PREF_NAME = "mypref";
-    private final static String KEY_EMAIL = "email";
-    TextView name, email;
+    private final static String KEY_NAME = "name";
+    TextView name;
     ImageView backBtn;
     Button logoutbtn;
 
@@ -30,16 +30,13 @@ public class Userinfo extends AppCompatActivity {
         setContentView(R.layout.activity_userinfo);
 
         name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
         logoutbtn = findViewById(R.id.logoutbtn);
         backBtn = findViewById(R.id.backBtn);
 
         db = new DBHelper(this);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        String txtEmail = sharedPreferences.getString(KEY_EMAIL,null);
-        String txtName = db.getNameByEmail(txtEmail);
-        email.setText(txtEmail);
-        name.setText(txtEmail);
+        String txtName = sharedPreferences.getString(KEY_NAME,"");
+        name.setText(txtName);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
