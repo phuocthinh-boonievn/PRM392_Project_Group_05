@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.minicapstoneproject.Adapter.ProductAdapter;
 import com.example.minicapstoneproject.Database.DBHelper;
 import com.example.minicapstoneproject.Model.Product;
+import com.example.minicapstoneproject.Model.User;
 import com.example.minicapstoneproject.R;
 import com.example.minicapstoneproject.databinding.ActivityMainBinding;
 
@@ -34,16 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.username);
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-
         String email = sharedPreferences.getString(KEY_EMAIL,"");
 //        String email = "aaaa";
         db = new DBHelper(this);
         if (!email.equals("")) {
-            String name = db.getNameByEmail(email);
-            userName.setText(name);
+            userName.setText(email);
         }
         statusBarColor();
         initRecyclerView();

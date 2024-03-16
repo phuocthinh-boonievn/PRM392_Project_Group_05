@@ -52,15 +52,20 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean checkEmailPassword(String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ? AND password = ?", new String[]{email, password});
-        if(cursor.getCount()>0) return true;
-        else return false;
+        return cursor.getCount() > 0;
     }
     public String getNameByEmail(String email){
-        SQLiteDatabase db = this.getWritableDatabase();
+        try{SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email = ?", new String[]{email});
         if(cursor.getCount()>0){
-            return cursor.getString(2);
+            int index = cursor.getColumnIndex("name");
+            if (index!=-1) {
+                return cursor.getString(index);
+            }
         }
-        else return null;
+        return "";
+        } catch (Exception e){
+            return "";
+        }
     }
 }
