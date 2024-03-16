@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.text.Editable;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,21 +17,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.minicapstoneproject.Adapter.ProductAdapter;
 import com.example.minicapstoneproject.Model.Product;
 import com.example.minicapstoneproject.R;
 import com.example.minicapstoneproject.databinding.ActivityMainBinding;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +36,26 @@ public class MainActivity extends AppCompatActivity {
     private ImageView cartButton1, locationButton1;
     private TextView cartButton2, locationButton2;
 
+    ActivityMainBinding binding;
+    TextView userName;
+    SharedPreferences sharedPreferences;
+    private final static String SHARED_PREF_NAME = "mypref";
+    private final static String KEY_NAME = "name";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        userName = findViewById(R.id.username);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        String name = sharedPreferences.getString(KEY_NAME,"");
+        userName.setText(name);
 
         statusBarColor();
+        statusBarColor();
+        bottomNavigation();
+
         searchEditText = findViewById(R.id.editTextText);
         recyclerView = findViewById(R.id.PopularView);
         cartButton1 = findViewById(R.id.cartImg); // Initialize cart button
@@ -128,8 +134,21 @@ public class MainActivity extends AppCompatActivity {
         }
         adapter.filterList(filteredList);
     }
+
     private void statusBarColor() {
         Window window = MainActivity.this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.purple_Dark));
+    }
+    private void bottomNavigation() {
+        binding.cartBtn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
+    }
+
+    public void profile(View view) {
+        String temp = sharedPreferences.getString(KEY_NAME,"");
+        if(!temp.equals("")){
+            startActivity(new Intent(getApplicationContext(), Userinfo.class));
+        }else{
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        }
     }
 }
