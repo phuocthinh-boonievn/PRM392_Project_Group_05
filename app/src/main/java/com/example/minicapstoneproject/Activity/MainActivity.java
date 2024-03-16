@@ -61,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         productList.add(new Product("T-shirt 1", "item_1","Cheap, affordable product", 9, 5.99, 3.3, 0));
-        productList.add(new Product("T-shirt 2", "item_1","High end clothing with fine fabric", 7, 29.99, 4.5, 0));
-        productList.add(new Product("Watch 2", "item_2","Affordable watch", 6, 54.99, 5, 0));
-        productList.add(new Product("Watch 2", "item_2","If you're stuck trying to find the perfect words for that special someone, take a look at some of our favorite suggestions", 7, 4599.99, 3.5, 0));
-        productList.add(new Product("Phone 1", "item_3","Amazing phone! Great value", 8, 599.99, 2.2, 0));
-        productList.add(new Product("Phone 2", "item_3","Cheap, easy to use, easy to buy", 8, 199.99, 4.5, 0));
+        productList.add(new Product("T-shirt Local Brand", "item_1","High end clothing with fine fabric", 7, 29.99, 4.5, 0));
+        productList.add(new Product("Watch Cheap Price", "item_2","Affordable watch", 6, 54.99, 5, 0));
+        productList.add(new Product("Luxury Watch", "item_2","If you're stuck trying to find the perfect words for that special someone, take a look at some of our favorite suggestions", 7, 4599.99, 3.5, 0));
+        productList.add(new Product("Phone Luxury", "item_3","Amazing phone! Great value", 8, 599.99, 2.2, 0));
+        productList.add(new Product("Phone Cheap", "item_3","Cheap, easy to use, easy to buy", 8, 199.99, 4.5, 0));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ProductAdapter((ArrayList<Product>) productList);
